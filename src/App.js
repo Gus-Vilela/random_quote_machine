@@ -1,25 +1,24 @@
-import logo from './logo.svg';
 import './App.css';
 
-function App() {
+function Quote() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div id='quote-box'>
+      <p id='text'>
+        "The best way to predict the future is to invent it."
+      </p>
+      <p id='author'>
+        - Alan Kay
+      </p>
+
+      <button id='new-quote'>New Quote</button>
+      
+      <a id='tweet-quote' href='twitter.com/intent/tweet' 
+      target='_blank'>Tweet Quote</a>      
     </div>
-  );
+  )
+}
+function App() {
+  return <Quote />
 }
 
 export default App;
