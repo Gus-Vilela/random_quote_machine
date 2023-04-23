@@ -1,6 +1,6 @@
 #quote-box{
   background-color: #313235;
-  width: 75vw;
+  max-width: 58vw;
   margin: auto;
   margin-top: 10vh;
   border-radius: 10px;
@@ -26,6 +26,7 @@ p{
   width: 100%;
   margin: 0;
   padding-bottom: 12px;
+  line-height: 35px;
 }
 
 #author{
@@ -38,13 +39,13 @@ p{
 #text::before{
   content: open-quote;
   color: #61DAFB;
-  font-size: 2rem;
+  font-size: 1.8rem;
 }
 
 #text::after{
   content: close-quote;
   color: #61DAFB;
-  font-size: 2rem;
+  font-size: 1.8rem;
 }
 
 #buttons{
@@ -55,9 +56,8 @@ p{
 }
 
 button{
-  background-color: #fff;
-  color: #313235;
-  border: none;
+  color: #fff;
+  border: solid;
   border-radius: 5px;
   padding: 10px;
   font-size: 1rem;
@@ -70,4 +70,10 @@ a{
   color: #61DAFB;
   text-decoration: none;
   font-weight: bold;
+}
+
+main{
+  width: 100vw;
+  height: 100vh;
+  display: grid;
 }
