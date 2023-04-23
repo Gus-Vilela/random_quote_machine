@@ -1,6 +1,5 @@
 #quote-box{
   background-color: #313235;
-  height: 25vh;
   width: 75vw;
   margin: auto;
   margin-top: 10vh;
@@ -33,6 +32,7 @@ p{
   font-size: 1.2rem;
   color: #fff;
   text-align: right;
+  padding-bottom: 12px;
 }
 
 #text::before{
@@ -63,6 +63,7 @@ button{
   font-size: 1rem;
   cursor: pointer;
   font-weight: bold;
+  cursor: pointer;
 }
 
 a{
