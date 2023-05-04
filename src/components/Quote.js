@@ -1,42 +1,83 @@
 import quoteData from "../quoteData";
-import {useState} from 'react';
+import {useState, useEffect} from 'react';
 import Buttons from "./Buttons";
 
 function Quote(props) {
-  const [quotes] = useState(quoteData.data.quotes);
+  const [quote, setQuote] = useState();
 
-  const iniQuote = () => {
-    const randomIndex = Math.floor(Math.random() * quotes.length);
-    const randomQuote = quotes[randomIndex];
-    const url = `https://twitter.com/intent/tweet?text="${randomQuote.quote}" - ${randomQuote.author}`
-    return {id : randomQuote.id, quote : randomQuote.quote, author : randomQuote.author,url : url}
+  async function fetchQuotes() {
+    try{
+      const response = await fetch("https://api.quotable.io/random?tags=technology");
+      const { statusCode, statusMessage, ...data } = await response.json();
+      if (!response.ok) throw new Error(`${statusCode} ${statusMessage}`);
+      setQuote(data);
+    } catch (error) {
+      console.error(error);
+      setQuote({ content: "Opps... Something went wrong" });
+    }
   }
-  const [state, setState] = useState(iniQuote);
+  useEffect(() => {
+    fetchQuotes();
+  }
+  , []);
   
-  const newQuote = () => {
-    setState(
-      prev => {
-        let quote = iniQuote();
-        while (prev.id === quote.id) {
-          quote = iniQuote();
-        }
-        return quote;
-      }
-    );
+  // const [quotes] = useState(quoteData.data.quotes);
+  
+
+  // const iniQuote = () => {
+  //     const randomIndex = Math.floor(Math.random() * quotes.length);
+  //     const randomQuote = quotes[randomIndex];
+  //     const url = `https://twitter.com/intent/tweet?text="${randomQuote.content}" - ${randomQuote.author}`
+  //     return {id : randomQuote.id, content : randomQuote.content, author : randomQuote.author,url : url}
+  // }
+
+  // const [state, setState] = useState(iniQuote);
+  
+  // const newQuote = () => {
+  //   setState(
+  //     prev => {
+  //       let quote = iniQuote();
+  //       while (prev.id === quote.id) {
+  //         quote = iniQuote();
+  //       }
+  //       return quote;
+  //     }
+  //   );
+  // }
+
+  const QuoteBox = () => {
+    if(!quote)
+      return (
+        <div id='quote-box'>
+          <div>
+            <p id='text'>
+              Loading...
+            </p>
+          </div>
+        </div>
+      )
+    else
+      return (
+        <div id='quote-box'>
+          <div>
+            <p id='text'>
+              {quote.content}
+            </p>
+            <p id='author'>
+              - {quote.author}
+            </p>
+          </div>
+          <Buttons newQuote={fetchQuotes} 
+          url={`https://twitter.com/intent/tweet?text="${quote.content}" - ${quote.author}`} 
+          changeColor={props.changeColor} 
+          color={props.color}/>
+        </div>
+        )
   }
+
 
   return (
-    <div id='quote-box'>
-      <div>
-        <p id='text'>
-          {state.quote}
-        </p>
-        <p id='author'>
-          - {state.author}
-        </p>
-      </div>
-      <Buttons newQuote={newQuote} url={state.url} changeColor={props.changeColor} color={props.color}/>
-    </div>
+    <QuoteBox/>
   )
 }
 

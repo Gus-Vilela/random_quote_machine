@@ -11,15 +11,16 @@ function Buttons (props) {
   
   return (
     <div id='buttons'>
-        
         <button id='new-quote' onClick={handleClick} style={{backgroundColor: props.color}}>New Quote</button>
         <div className='tooltip'>
-        <a id='tweet-quote' 
-        href={props.url}
-        target='_blank' className='tooltip'>
-          {icon} 
-        </a>
-        <span className='tooltiptext'>Tweet this!</span>
+          <a id='tweet-quote' 
+          href={props.url}
+          target='_blank' className='tooltip'>
+            {icon} 
+          </a>
+          <span className='tooltiptext'>
+            Tweet this!
+          </span>
         </div>
     </div>
   )
